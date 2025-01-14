@@ -1,4 +1,23 @@
 // src/components/ProductCatalog.tsx
+import { useCart } from '../context/CartContext';
+import { products } from '../data/products';
+import { useState } from 'react';
+
+export default function ProductCatalog() {
+  const { addToCart } = useCart();
+  // Add new state for sorting
+  const [sortBy, setSortBy] = useState('name');
+
+  // Modify filteredProducts to include sorting
+  // ... sorting logic here ...
+
+  return (
+    <div>
+      {/* Component JSX */}
+    </div>
+  );
+}
+
 // Add new state for sorting
 const [sortBy, setSortBy] = useState('name');
 
