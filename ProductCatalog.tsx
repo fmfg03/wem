@@ -53,4 +53,38 @@ return matchesCategory && matchesSearch && matchesPrice;
     />
   </div>
 </div>
+// src/components/ProductCatalog.tsx
+// Add pagination state
+const [currentPage, setCurrentPage] = useState(1);
+const productsPerPage = 9;
+
+// Modify filtered products to include pagination
+const paginatedProducts = useMemo(() => {
+  const startIndex = (currentPage - 1) * productsPerPage;
+  return filteredProducts.slice(startIndex, startIndex + productsPerPage);
+}, [filteredProducts, currentPage]);
+
+// Add pagination component
+const Pagination = () => {
+  const pageCount = Math.ceil(filteredProducts.length / productsPerPage);
+  
+  return (
+    <div className="flex justify-center mt-8 space-x-2">
+      {Array.from({ length: pageCount }).map((_, index) => (
+        <button
+          key={index}
+          onClick={() => setCurrentPage(index + 1)}
+          className={`px-4 py-2 rounded-lg ${
+            currentPage === index + 1
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+          }`}
+        >
+          {index + 1}
+        </button>
+      ))}
+    </div>
+  );
+};
+
 
